@@ -6,6 +6,7 @@ class RssGenerator
     var $_language = 'zh-tw';
     var $_description = 'YOUR_DESCRIPTION';
     var $_link = 'http://example.com/';
+    var $_ttl  = 10; // minutes
     var $_generator = 'YOUR_NAME';
     var $_version = '2.0';
 
@@ -32,6 +33,9 @@ class RssGenerator
 
         if ($name == 'link')
             $this->_link = stripslashes($value);
+
+        if ($name == 'ttl')
+            $this->_ttl = stripslashes($value);
     }
 
     /**
@@ -56,7 +60,7 @@ class RssGenerator
         $res .= "\t\t<link><![CDATA[" . $this->_link . "]]></link>\n";
         $res .= "\t\t<language>" . $this->_language . "</language>\n";
         $res .= "\t\t<lastBuildDate>" . date(DATE_RSS) . "</lastBuildDate>\n";
-        $res .= "\t\t<ttl>5</ttl>\n";
+        $res .= "\t\t<ttl>" . $this->_ttl . "</ttl>\n";
         $res .= "\t\t<generator><![CDATA[" . $this->_generator . "]]></generator>\n";
 
         // items
